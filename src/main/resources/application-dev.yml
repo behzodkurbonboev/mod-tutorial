@@ -1,0 +1,59 @@
+app:
+  host: localhost
+
+spring:
+  application:
+    name: name
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/dbname
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:${server.port}
+          jwk-set-uri: http://localhost:${server.port}/oauth2/jwks
+
+ttt:
+  minio:
+    application: TTT
+    host: http://127.0.0.1:9000
+    username: ${MINIO_USERNAME:minio}
+    password: ${MINIO_PASSWORD:password}
+
+  sms:
+    auth-url: #url
+    host: #url
+    username: ${SMS_USERNAME:sms}
+    password: ${SMS_PASSWORD:password}
+    nickname: TTT
+    from: 4546
+
+  jwt:
+    public-key: classpath:keys/public.pem
+    private-key: classpath:keys/private.pem
+    user-claim: #claim
+    auth-claim: auth
+    key-id: #key
+    access-token-expiration: 1
+    refresh-token-expiration: 1
+
+logging:
+  level:
+    org:
+      springframework: INFO
